@@ -1,10 +1,14 @@
 * {
   box-sizing: border-box;
 }
+
+#breadcrumb {
+  margin-bottom: 32px;
+}
+
 .category-list {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 32px;
 }
 
 .category {
@@ -41,5 +45,13 @@
 }
 
 .return-button {
+  cursor: pointer;
+}
+
+.show-all-trigger {
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+  text-align: center;
   cursor: pointer;
 }
