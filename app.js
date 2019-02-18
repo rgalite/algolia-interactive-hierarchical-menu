@@ -44,6 +44,10 @@ search.addWidget(
       const splittedFacetName = item.split(' > ')
       return splittedFacetName[splittedFacetName.length - 1]
     },
+    text: {
+      showMore: 'Show more...',
+      previous: '&nbsp;',
+    },
   })
 )
 

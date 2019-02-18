@@ -21,7 +21,10 @@ window.customAlgolia.InteractiveHierarchicalMenuWidget = function({
       itemActive: 'ihm-category--active',
       showMoreLink: 'ihm-show-all-trigger',
     },
-    showMoreText: 'Show more',
+    text: {
+      showMore: 'Show more',
+      previous: '&lt;',
+    },
     transformItems: itemName => itemName,
     showLastLevel: true,
   }
@@ -79,7 +82,7 @@ window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getShowAllLink 
   const container = this.container
   const cssClasses = this.options.cssClasses
 
-  link.innerHTML = this.options.showMoreText
+  link.innerHTML = this.options.text.showMore
   link.setAttribute('class', this.options.cssClasses.showMoreLink)
   link.addEventListener('click', function(event) {
     container.querySelectorAll(`.${cssClasses.item}`).forEach(facetLink => {
@@ -132,7 +135,7 @@ window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.render = functi
   if (currentLevel) {
     const prevButton = document.createElement('a')
     prevButton.setAttribute('class', this.options.cssClasses.returnButton)
-    prevButton.innerHTML = `&lt;`
+    prevButton.innerHTML = this.options.text.previous
 
     this.attachPreviousClickEvent({
       helper,
@@ -147,15 +150,11 @@ window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.render = functi
       level: currentLevel - 1,
     })
 
-    const rightThingy = document.createElement('span')
-    rightThingy.innerHTML = '&nbsp;'
-
     const titleWrapper = document.createElement('div')
     titleWrapper.setAttribute('class', this.options.cssClasses.titleWrapper)
 
     titleWrapper.appendChild(prevButton)
     titleWrapper.appendChild(title)
-    titleWrapper.appendChild(rightThingy)
 
     this.container.appendChild(titleWrapper)
   } else {
