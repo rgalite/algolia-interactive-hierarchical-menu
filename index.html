@@ -14,6 +14,68 @@
       href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.0/themes/algolia-min.css"
     />
     <link rel="stylesheet" type="text/css" href="app.css" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      #breadcrumb {
+        margin-bottom: 32px;
+      }
+
+      .ihm-category {
+        display: flex;
+        align-items: center;
+        padding: 10px 38px 10px 16px;
+        width: 100%;
+        min-height: 56px;
+        height: 100%;
+        line-height: 1.2em;
+        font-weight: 400;
+        position: relative;
+        background-color: #f7f2e5;
+        box-shadow: none;
+        border: 1px solid #fff;
+        flex: 0 0 25%;
+        margin: 0;
+      }
+
+      .ihm-category:after {
+        background-image: url(https://shopping.dmkt-sp.jp/excludes/ds/img/icon/sprite-ds.png);
+        color: #666;
+        content: ' ';
+        width: 24px;
+        height: 24px;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-size: 120px;
+        background-position: -0px -0px;
+        position: absolute;
+        right: 8px;
+      }
+
+      .ihm-return-button {
+        padding-left: 24px;
+        position: relative;
+      }
+
+      .ihm-return-button:before {
+        right: 8px;
+        content: ' ';
+        width: 24px;
+        height: 24px;
+        overflow: hidden;
+        background-image: url(https://shopping.dmkt-sp.jp/excludes/ds/img/icon/sprite-ds.png);
+        background-repeat: no-repeat;
+        background-size: 120px;
+        background-position: -24px -72px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -0.7em;
+      }
+    </style>
   </head>
 
   <body>
