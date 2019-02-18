@@ -10,8 +10,7 @@ window.customAlgolia.HierarchicalMenuWidget = function({
     showMoreLimit: 10,
     separator: ' > ',
     rootPath: null,
-    //    showParentLevel: false,
-    //    sortBy: () => {},
+    showParentLevel: true,
     templates: {},
     cssClasses: {
       returnButton: 'return-button',
@@ -22,7 +21,7 @@ window.customAlgolia.HierarchicalMenuWidget = function({
       showMoreLink: 'show-all-trigger',
     },
     showMoreText: 'Show more',
-    //    transformItems: () => {}
+    transformItems: itemName => itemName,
   }
 
   this.options = {
@@ -69,10 +68,7 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.getSelectedFacetsName = fu
   const facetRefinementName = this.options.attributes[level]
 
   return facetsRefinements[facetRefinementName]
-    .map(facetName => {
-      const splittedFacetName = facetName.split(this.options.separator)
-      return splittedFacetName[splittedFacetName.length - 1]
-    })
+    .map(facetName => this.options.transformItems(facetName))
     .join(', ')
 }
 
@@ -96,6 +92,32 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.getShowAllLink = function(
   return link
 }
 
+window.customAlgolia.HierarchicalMenuWidget.prototype.getBreadcrumbTitle = function({
+  facetsRefinements,
+  level,
+}) {
+  if (this.options.showParentLevel) {
+    return this.options.attributes
+      .map(attribute => {
+        return facetsRefinements[attribute]
+      })
+      .filter(facetRefinement => {
+        return !!facetRefinement
+      })
+      .map(facetRefinement => {
+        return facetRefinement
+          .map(facetRefinement => this.options.transformItems(facetRefinement))
+          .join(', ')
+      })
+      .join(this.options.separator)
+  }
+
+  return this.getSelectedFacetsName({
+    level: currentLevel - 1,
+    facetsRefinements: state.facetsRefinements,
+  })
+}
+
 window.customAlgolia.HierarchicalMenuWidget.prototype.render = function({
   results,
   helper,
@@ -106,11 +128,6 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.render = function({
 
   // Add a previous button
   if (currentLevel) {
-    const facetName = this.getSelectedFacetsName({
-      level: currentLevel - 1,
-      facetsRefinements: state.facetsRefinements,
-    })
-
     const prevButton = document.createElement('a')
     prevButton.setAttribute('class', this.options.cssClasses.returnButton)
     prevButton.innerHTML = `&lt;`
@@ -123,7 +140,10 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.render = function({
     })
 
     const title = document.createElement('span')
-    title.innerHTML = facetName
+    title.innerHTML = this.getBreadcrumbTitle({
+      facetsRefinements: state.facetsRefinements,
+      level: currentLevel - 1,
+    })
 
     const rightThingy = document.createElement('span')
     rightThingy.innerHTML = '&nbsp;'
@@ -155,8 +175,7 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.render = function({
   if (facets) {
     Object.keys(facets.data).forEach((facetName, index) => {
       const link = document.createElement('a')
-      const splittedFacetName = facetName.split(this.options.separator)
-      const innerHTML = splittedFacetName[splittedFacetName.length - 1]
+      const innerHTML = this.options.transformItems(facetName)
 
       link.setAttribute('class', this.options.cssClasses.item)
 

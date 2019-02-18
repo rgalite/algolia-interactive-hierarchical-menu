@@ -40,6 +40,10 @@ search.addWidget(
       'hierarchicalCategories.lvl3',
     ],
     showMoreLimit: 8,
+    transformItems: item => {
+      const splittedFacetName = item.split(' > ')
+      return splittedFacetName[splittedFacetName.length - 1]
+    },
   })
 )
 
