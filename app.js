@@ -31,7 +31,7 @@ search.addWidget(
 )
 
 search.addWidget(
-  new customAlgolia.HierarchicalMenuWidget({
+  new customAlgolia.InteractiveHierarchicalMenuWidget({
     container: '#breadcrumb',
     attributes: [
       'hierarchicalCategories.lvl0',

@@ -1,5 +1,5 @@
 window.customAlgolia = {}
-window.customAlgolia.HierarchicalMenuWidget = function({
+window.customAlgolia.InteractiveHierarchicalMenuWidget = function({
   container,
   attributes,
   ...optionalParameters
@@ -13,15 +13,17 @@ window.customAlgolia.HierarchicalMenuWidget = function({
     showParentLevel: true,
     templates: {},
     cssClasses: {
-      returnButton: 'return-button',
-      titleWrapper: 'title',
-      rootTitleWrapper: 'title title--centered',
-      list: 'category-list',
-      item: 'category',
-      showMoreLink: 'show-all-trigger',
+      returnButton: 'ihm-return-button',
+      titleWrapper: 'ihm-title',
+      rootTitleWrapper: 'ihm-title ihm-title--centered',
+      list: 'ihm-category-list',
+      item: 'ihm-category',
+      itemActive: 'ihm-category--active',
+      showMoreLink: 'ihm-show-all-trigger',
     },
     showMoreText: 'Show more',
     transformItems: itemName => itemName,
+    showLastLevel: true,
   }
 
   this.options = {
@@ -32,13 +34,13 @@ window.customAlgolia.HierarchicalMenuWidget = function({
   }
 }
 
-window.customAlgolia.HierarchicalMenuWidget.prototype.getConfiguration = function() {
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getConfiguration = function() {
   return {
     facets: this.options.attributes,
   }
 }
 
-window.customAlgolia.HierarchicalMenuWidget.prototype.attachPreviousClickEvent = function({
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.attachPreviousClickEvent = function({
   state,
   helper,
   button,
@@ -51,7 +53,7 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.attachPreviousClickEvent =
   })
 }
 
-window.customAlgolia.HierarchicalMenuWidget.prototype.init = function({
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.init = function({
   helper,
   state,
 }) {
@@ -61,7 +63,7 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.init = function({
       : this.options.container
 }
 
-window.customAlgolia.HierarchicalMenuWidget.prototype.getSelectedFacetsName = function({
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getSelectedFacetsName = function({
   level,
   facetsRefinements,
 }) {
@@ -72,7 +74,7 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.getSelectedFacetsName = fu
     .join(', ')
 }
 
-window.customAlgolia.HierarchicalMenuWidget.prototype.getShowAllLink = function() {
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getShowAllLink = function() {
   const link = document.createElement('a')
   const container = this.container
   const cssClasses = this.options.cssClasses
@@ -92,7 +94,7 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.getShowAllLink = function(
   return link
 }
 
-window.customAlgolia.HierarchicalMenuWidget.prototype.getBreadcrumbTitle = function({
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getBreadcrumbTitle = function({
   facetsRefinements,
   level,
 }) {
@@ -118,7 +120,7 @@ window.customAlgolia.HierarchicalMenuWidget.prototype.getBreadcrumbTitle = funct
   })
 }
 
-window.customAlgolia.HierarchicalMenuWidget.prototype.render = function({
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.render = function({
   results,
   helper,
   state,

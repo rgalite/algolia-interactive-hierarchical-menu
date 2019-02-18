@@ -6,12 +6,12 @@
   margin-bottom: 32px;
 }
 
-.category-list {
+.ihm-category-list {
   display: flex;
   flex-wrap: wrap;
 }
 
-.category {
+.ihm-category {
   margin: 0;
   padding: 10px 38px 10px 16px;
   box-sizing: border-box;
@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 
-.title {
+.ihm-title {
   background: #333;
   color: white;
   padding: 10px 8px;
@@ -39,16 +39,16 @@
   min-height: 38px;
 }
 
-.title.title--centered {
+.ihm-title.ihm-title--centered {
   text-align: center;
   display: block;
 }
 
-.return-button {
+.ihm-return-button {
   cursor: pointer;
 }
 
-.show-all-trigger {
+.ihm-show-all-trigger {
   margin-top: 8px;
   display: block;
   width: 100%;
