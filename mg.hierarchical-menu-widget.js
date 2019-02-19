@@ -97,6 +97,26 @@ window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getShowAllLink 
   return link
 }
 
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getWidgetState = function(
+  uiState,
+  { searchParameters }
+) {
+  return {
+    ...uiState,
+    facetsRefinements: searchParameters.facetsRefinements,
+  }
+}
+
+window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getWidgetSearchParameters = function(
+  searchParameters,
+  { uiState }
+) {
+  return {
+    ...searchParameters,
+    facetsRefinements: uiState.facetsRefinements,
+  }
+}
+
 window.customAlgolia.InteractiveHierarchicalMenuWidget.prototype.getBreadcrumbTitle = function({
   facetsRefinements,
   level,
